@@ -16,5 +16,11 @@ body > .container {
 
     display: flex;
     flex-wrap: wrap;
-    width: 802px;
+    width: 402px;
+}
+
+.square-design {
+    border: 1px solid black;
+    height: 25px;
+    width: 25px;
 }
