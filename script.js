@@ -14,3 +14,15 @@ for (let i = 0; i < 16; i++) {
 }
 
 container.appendChild(fragmentDivs);
+
+function hoverEffect(event) {
+    if (event.target !== container) {
+        event.stopPropagation();
+        console.log(event.target.className);
+        event.target.style.backgroundColor = "#0e0e55";
+    }
+}
+
+container.addEventListener("mouseenter", hoverEffect, {
+    capture: true,
+});
