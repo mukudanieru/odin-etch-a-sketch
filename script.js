@@ -3,17 +3,25 @@ const fragmentDivs = document.createDocumentFragment();
 
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
-    createGrid(16, 16);
+    createGrid(17);
     addHoverEffect();
 });
 
-function createGrid(width, height) {
-    for (let i = 0; i < 16; i++) {
-        for (let j = 0; j < 16; j++) {
+function createGrid(gridSize) {
+    container.style.border = "1px solid black";
+    const fixedWidth = 800; // px
+    let boxSize = fixedWidth / gridSize;
+
+    let containerWidth = fixedWidth + 2;
+    container.style.width = `${containerWidth}px`;
+    console.log(container.style.width);
+
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
             const div = document.createElement("div");
             div.className = `div-${i}-${j}`;
-            div.style.height = "25px";
-            div.style.width = "25px";
+            div.style.height = `${boxSize}px`;
+            div.style.width = `${boxSize}px`;
             div.style.border = "1px solid black";
 
             fragmentDivs.appendChild(div);
