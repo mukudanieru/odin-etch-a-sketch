@@ -1,13 +1,18 @@
 const container = document.querySelector(".container");
-const fragmentDivs = document.createDocumentFragment();
+const gridSettings = document.querySelector(".grid-settings");
 
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
-    createGrid(17);
+    createGrid(16);
     addHoverEffect();
+    changeGrid();
 });
 
 function createGrid(gridSize) {
+    const fragmentDivs = document.createDocumentFragment();
+
+    container.innerHTML = "";
+
     container.style.border = "1px solid black";
     const fixedWidth = 800; // px
     let boxSize = fixedWidth / gridSize;
@@ -42,5 +47,23 @@ function addHoverEffect() {
 
     container.addEventListener("mouseenter", hoverEffect, {
         capture: true,
+    });
+}
+
+function changeGrid() {
+    gridSettings.addEventListener("click", () => {
+        let number = prompt("Enter the new number of grid:");
+
+        if (number !== null && number !== "" && !isNaN(number)) {
+            number = Number(number);
+
+            if (number > 0 && number < 101) {
+                createGrid(number);
+            } else {
+                alert("Please enter a number from 1 to 100 only.");
+            }
+        } else {
+            alert("Please enter a valid number.");
+        }
     });
 }
