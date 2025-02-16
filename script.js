@@ -1,11 +1,11 @@
 const container = document.querySelector(".container");
-const gridSettings = document.querySelector(".grid-settings");
+// const gridSettings = document.querySelector(".grid-settings");
 
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
     createGrid(16);
     addHoverEffect();
-    changeGrid();
+    // changeGrid();
 });
 
 function createGrid(gridSize) {
@@ -14,7 +14,7 @@ function createGrid(gridSize) {
     container.innerHTML = "";
 
     container.style.border = "1px solid black";
-    const fixedWidth = 800; // px
+    const fixedWidth = 700; // px
     let boxSize = fixedWidth / gridSize;
 
     let containerWidth = fixedWidth + 2;
@@ -28,6 +28,7 @@ function createGrid(gridSize) {
             div.style.height = `${boxSize}px`;
             div.style.width = `${boxSize}px`;
             div.style.border = "1px solid black";
+            div.style.backgroundColor = "white";
 
             fragmentDivs.appendChild(div);
         }
@@ -41,7 +42,7 @@ function addHoverEffect() {
         if (event.target !== container) {
             event.stopPropagation();
             console.log(event.target.className);
-            event.target.style.backgroundColor = "#0e0e55";
+            event.target.style.backgroundColor = "black";
         }
     }
 
@@ -50,20 +51,20 @@ function addHoverEffect() {
     });
 }
 
-function changeGrid() {
-    gridSettings.addEventListener("click", () => {
-        let number = prompt("Enter the new number of grid:");
+// function changeGrid() {
+//     gridSettings.addEventListener("click", () => {
+//         let number = prompt("Enter the new number of grid:");
 
-        if (number !== null && number !== "" && !isNaN(number)) {
-            number = Number(number);
+//         if (number !== null && number !== "" && !isNaN(number)) {
+//             number = Number(number);
 
-            if (number > 0 && number < 101) {
-                createGrid(number);
-            } else {
-                alert("Please enter a number from 1 to 100 only.");
-            }
-        } else {
-            alert("Please enter a valid number.");
-        }
-    });
-}
+//             if (number > 0 && number < 101) {
+//                 createGrid(number);
+//             } else {
+//                 alert("Please enter a number from 1 to 100 only.");
+//             }
+//         } else {
+//             alert("Please enter a valid number.");
+//         }
+//     });
+// }
