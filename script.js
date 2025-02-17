@@ -1,14 +1,24 @@
+const defaultGridSettings = 16;
+
 const container = document.querySelector(".container");
-// const gridSettings = document.querySelector(".grid-settings");
+const gridRange = document.querySelector("#grid-range");
+const gridValue = document.querySelector("#grid-value");
 
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
-    createGrid(16);
+    createGrid(defaultGridSettings);
     addHoverEffect();
+
+    gridRange.addEventListener("input", () => {
+        createGrid(gridRange.value);
+    });
 });
 
 function createGrid(gridSize) {
     const fragmentDivs = document.createDocumentFragment();
+
+    gridRange.value = `${gridSize}`;
+    gridValue.textContent = `${gridRange.value} x ${gridRange.value}`;
 
     container.innerHTML = "";
 

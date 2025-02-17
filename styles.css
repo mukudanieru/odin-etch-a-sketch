@@ -4,7 +4,6 @@
     margin: 0;
     border: 0;
     box-sizing: border-box;
-    background-color: #9a2a2a;
     font-family: "Inter", monospace;
 }
 
@@ -17,6 +16,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #9a2a2a;
 }
 
 body > .header {
@@ -77,6 +77,29 @@ body > .footer {
 .left > .grid-settings {
     background-color: #272838;
     height: 700px;
-    width: 400px;
+    width: 380px;
     margin-right: 24px;
+    border-radius: 5px;
+}
+
+.grid-settings > div {
+    margin: 48px 25px;
+}
+
+.grid-size {
+    display: flex;
+    gap: 18px;
+    flex-direction: column;
+    background-color: #272838;
+    color: white;
+    font-size: 18px;
+}
+
+input[type="range"] {
+    width: 85%;
+    height: 8px;
+    background: #d9d9d9;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
 }
