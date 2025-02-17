@@ -7,7 +7,7 @@ const gridValue = document.querySelector("#grid-value");
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
     createGrid(defaultGridSettings);
-    addHoverEffect();
+    addHoverEffect("normal");
 
     gridRange.addEventListener("input", () => {
         createGrid(gridRange.value);
@@ -22,7 +22,7 @@ function createGrid(gridSize) {
 
     container.innerHTML = "";
 
-    container.style.border = "1px solid black";
+    container.style.border = "1px solid gray";
     const fixedWidth = 700; // px
     let boxSize = fixedWidth / gridSize;
 
@@ -35,7 +35,7 @@ function createGrid(gridSize) {
             div.className = `div-${i}-${j}`;
             div.style.height = `${boxSize}px`;
             div.style.width = `${boxSize}px`;
-            div.style.border = "1px solid black";
+            div.style.border = "1px solid gray";
             div.style.backgroundColor = "white";
 
             fragmentDivs.appendChild(div);
@@ -45,12 +45,20 @@ function createGrid(gridSize) {
     container.appendChild(fragmentDivs);
 }
 
-function addHoverEffect() {
+function addHoverEffect(mode) {
     function hoverEffect(event) {
         if (event.target !== container) {
             event.stopPropagation();
-            console.log(event.target.className);
-            event.target.style.backgroundColor = "black";
+
+            if (mode == "normal") {
+                event.target.style.backgroundColor = "rgb(128, 128, 128)";
+            } else if (mode == "random") {
+                let red = Math.floor(Math.random() * 256);
+                let blue = Math.floor(Math.random() * 256);
+                let green = Math.floor(Math.random() * 256);
+
+                event.target.style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
+            }
         }
     }
 

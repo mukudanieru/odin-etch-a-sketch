@@ -83,16 +83,17 @@ body > .footer {
 }
 
 .grid-settings > div {
-    margin: 48px 25px;
+    margin: 24px 28px;
+    color: white;
+    font-size: 18px;
 }
 
-.grid-size {
+.grid-settings > .grid-size {
+    margin-top: 32px;
     display: flex;
     gap: 18px;
     flex-direction: column;
     background-color: #272838;
-    color: white;
-    font-size: 18px;
 }
 
 input[type="range"] {
@@ -102,4 +103,25 @@ input[type="range"] {
     border-radius: 5px;
     outline: none;
     cursor: pointer;
+}
+
+.grid-settings > .drawing-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#drawing-mode-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 20px;
+    padding-left: 8px;
+}
+
+#drawing-mode-form label {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
