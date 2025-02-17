@@ -22,7 +22,7 @@ function createGrid(gridSize) {
 
     container.innerHTML = "";
 
-    container.style.border = "1px solid gray";
+    container.style.border = "1px solid black";
     const fixedWidth = 700; // px
     let boxSize = fixedWidth / gridSize;
 
@@ -35,7 +35,7 @@ function createGrid(gridSize) {
             div.className = `div-${i}-${j}`;
             div.style.height = `${boxSize}px`;
             div.style.width = `${boxSize}px`;
-            div.style.border = "1px solid gray";
+            div.style.border = "1px solid lightgray";
             div.style.backgroundColor = "white";
 
             fragmentDivs.appendChild(div);
