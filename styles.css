@@ -39,12 +39,16 @@ body > .content {
 
 .content > .left {
     /* border: 1px solid red; */
-    flex: 0 0 30%;
+    flex: 0 0 40%;
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
 .content > .right {
     /* border: 1px solid blue; */
-    flex: 0 0 70%;
+    flex: 0 0 60%;
 
     display: flex;
     justify-content: center;
@@ -68,4 +72,11 @@ body > .footer {
     flex-wrap: wrap;
     border-radius: 3px;
     margin: 16px;
+}
+
+.left > .grid-settings {
+    background-color: #272838;
+    height: 700px;
+    width: 400px;
+    margin-right: 24px;
 }

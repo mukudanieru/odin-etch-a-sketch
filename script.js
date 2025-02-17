@@ -5,7 +5,6 @@ const container = document.querySelector(".container");
 document.addEventListener("DOMContentLoaded", () => {
     createGrid(16);
     addHoverEffect();
-    // changeGrid();
 });
 
 function createGrid(gridSize) {
@@ -19,7 +18,6 @@ function createGrid(gridSize) {
 
     let containerWidth = fixedWidth + 2;
     container.style.width = `${containerWidth}px`;
-    console.log(container.style.width);
 
     for (let i = 0; i < gridSize; i++) {
         for (let j = 0; j < gridSize; j++) {
@@ -50,21 +48,3 @@ function addHoverEffect() {
         capture: true,
     });
 }
-
-// function changeGrid() {
-//     gridSettings.addEventListener("click", () => {
-//         let number = prompt("Enter the new number of grid:");
-
-//         if (number !== null && number !== "" && !isNaN(number)) {
-//             number = Number(number);
-
-//             if (number > 0 && number < 101) {
-//                 createGrid(number);
-//             } else {
-//                 alert("Please enter a number from 1 to 100 only.");
-//             }
-//         } else {
-//             alert("Please enter a valid number.");
-//         }
-//     });
-// }
