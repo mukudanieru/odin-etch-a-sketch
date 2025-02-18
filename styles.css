@@ -68,6 +68,7 @@ body > .footer {
 }
 
 .right > .container {
+    background-color: white;
     display: flex;
     flex-wrap: wrap;
     border-radius: 3px;
@@ -120,8 +121,6 @@ input[type="range"] {
 }
 
 #drawing-mode-form label {
-    list-style-type: none;
     display: flex;
-    align-items: center;
     gap: 8px;
 }

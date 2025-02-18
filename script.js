@@ -6,11 +6,33 @@ const gridValue = document.querySelector("#grid-value");
 
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
+    const defaultRadio = document.querySelector(
+        'input[name="drawing-mode"][value="normal"]'
+    );
+
+    if (defaultRadio) {
+        defaultRadio.checked = true;
+    }
+
+    const defaultOption = document.querySelector(
+        'input[name="drawing-mode"]:checked'
+    );
+
     createGrid(defaultGridSettings);
-    addHoverEffect("normal");
+    addHoverEffect(defaultOption.value);
 
     gridRange.addEventListener("input", () => {
         createGrid(gridRange.value);
+    });
+
+    document.querySelectorAll('input[name="drawing-mode"]').forEach((radio) => {
+        radio.addEventListener("input", () => {
+            const selectedOption = document.querySelector(
+                'input[name="drawing-mode"]:checked'
+            );
+
+            addHoverEffect(selectedOption.value);
+        });
     });
 });
 
@@ -45,19 +67,40 @@ function createGrid(gridSize) {
     container.appendChild(fragmentDivs);
 }
 
+let currentHoverEffect = null;
+
 function addHoverEffect(mode) {
+    if (currentHoverEffect) {
+        container.removeEventListener("mouseenter", currentHoverEffect, {
+            capture: true,
+        });
+    }
+
     function hoverEffect(event) {
         if (event.target !== container) {
             event.stopPropagation();
 
+            console.log(mode);
+
             if (mode == "normal") {
-                event.target.style.backgroundColor = "rgb(128, 128, 128)";
+                event.target.style.backgroundColor = "black";
+                event.target.style.opacity = 1;
             } else if (mode == "random") {
                 let red = Math.floor(Math.random() * 256);
                 let blue = Math.floor(Math.random() * 256);
                 let green = Math.floor(Math.random() * 256);
 
                 event.target.style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
+                event.target.style.opacity = 1;
+            } else if (mode == "darken") {
+                event.target.style.backgroundColor = "black";
+
+                let currentOpacity =
+                    parseFloat(event.target.style.opacity) || 0;
+
+                currentOpacity = Math.min(currentOpacity + 0.1, 1.0);
+
+                event.target.style.opacity = currentOpacity.toString();
             }
         }
     }
@@ -65,4 +108,6 @@ function addHoverEffect(mode) {
     container.addEventListener("mouseenter", hoverEffect, {
         capture: true,
     });
+
+    currentHoverEffect = hoverEffect;
 }
