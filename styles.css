@@ -43,7 +43,7 @@ body > .content {
 
     display: flex;
     justify-content: right;
-    align-items: center;
+    align-items: start;
 }
 
 .content > .right {
@@ -77,8 +77,9 @@ body > .footer {
 
 .left > .grid-settings {
     background-color: #272838;
-    height: 700px;
+    /* height: 700px; */
     width: 380px;
+    margin-top: 16px;
     margin-right: 24px;
     border-radius: 5px;
 }
@@ -134,4 +135,27 @@ input[type="range"] {
 input[type="color"] {
     width: 100px;
     height: 30px;
+}
+
+.grid-settings > #reset {
+    margin: 24px 28px;
+    padding: 12px 34px;
+
+    font-size: 16px;
+    color: #fff;
+    border: 2px solid #9a2a2a;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.grid-settings > #reset:hover {
+    background-color: #9a2a2a;
+    color: #f8f8f8;
+}
+
+.grid-settings > #reset:active {
+    background-color: #7f2323;
+    color: #e6e6e6;
 }

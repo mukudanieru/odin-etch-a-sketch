@@ -2,9 +2,10 @@ const defaultGridSettings = 16;
 const defaultColor = "#000000";
 
 const container = document.querySelector(".container");
-const gridRange = document.querySelector("#grid-range");
+const gridRange = document.querySelector("#gridRange");
 const gridValue = document.querySelector("#gridValue");
 const colorPicker = document.querySelector("#colorPicker");
+const resetButton = document.querySelector("#reset");
 
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addHoverEffect(defaultOption.value, colorPicker.value);
 
     gridRange.addEventListener("input", () => {
-        createGrid(gridRange.value, colorPicker.value);
+        createGrid(gridRange.value);
     });
 
     colorPicker.addEventListener("input", () => {
@@ -45,6 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             addHoverEffect(selectedOption.value, colorPicker.value);
         });
+    });
+
+    resetButton.addEventListener("click", () => {
+        createGrid(gridRange.value);
     });
 });
 
