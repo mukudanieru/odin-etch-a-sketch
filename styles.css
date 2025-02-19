@@ -124,3 +124,14 @@ input[type="range"] {
     display: flex;
     gap: 8px;
 }
+
+.grid-settings > .color-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+input[type="color"] {
+    width: 100px;
+    height: 30px;
+}

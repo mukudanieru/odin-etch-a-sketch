@@ -1,8 +1,12 @@
 const defaultGridSettings = 16;
+const defaultColor = "#000000";
+
+let currentColor;
 
 const container = document.querySelector(".container");
 const gridRange = document.querySelector("#grid-range");
-const gridValue = document.querySelector("#grid-value");
+const gridValue = document.querySelector("#gridValue");
+const colorPicker = document.querySelector("#colorPicker");
 
 // MAIN
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,11 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
         'input[name="drawing-mode"]:checked'
     );
 
+    colorPicker.value = defaultColor;
+
     createGrid(defaultGridSettings);
-    addHoverEffect(defaultOption.value);
+    addHoverEffect(defaultOption.value, colorPicker.value);
 
     gridRange.addEventListener("input", () => {
-        createGrid(gridRange.value);
+        createGrid(gridRange.value, colorPicker.value);
+    });
+
+    colorPicker.addEventListener("input", () => {
+        const selectedOption = document.querySelector(
+            'input[name="drawing-mode"]:checked'
+        );
+
+        addHoverEffect(selectedOption.value, colorPicker.value);
     });
 
     document.querySelectorAll('input[name="drawing-mode"]').forEach((radio) => {
@@ -31,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 'input[name="drawing-mode"]:checked'
             );
 
-            addHoverEffect(selectedOption.value);
+            addHoverEffect(selectedOption.value, colorPicker.value);
         });
     });
 });
@@ -69,11 +83,17 @@ function createGrid(gridSize) {
 
 let currentHoverEffect = null;
 
-function addHoverEffect(mode) {
+function addHoverEffect(mode, color) {
     if (currentHoverEffect) {
         container.removeEventListener("mouseenter", currentHoverEffect, {
             capture: true,
         });
+    }
+
+    function rgbToHex(r, g, b) {
+        return `#${r.toString(16).padStart(2, "0")}${g
+            .toString(16)
+            .padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
     }
 
     function hoverEffect(event) {
@@ -81,9 +101,10 @@ function addHoverEffect(mode) {
             event.stopPropagation();
 
             console.log(mode);
+            console.log(color);
 
             if (mode == "normal") {
-                event.target.style.backgroundColor = "black";
+                event.target.style.backgroundColor = color;
                 event.target.style.opacity = 1;
             } else if (mode == "random") {
                 let red = Math.floor(Math.random() * 256);
@@ -92,8 +113,10 @@ function addHoverEffect(mode) {
 
                 event.target.style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
                 event.target.style.opacity = 1;
+
+                colorPicker.value = rgbToHex(red, blue, green);
             } else if (mode == "darken") {
-                event.target.style.backgroundColor = "black";
+                event.target.style.backgroundColor = color;
 
                 let currentOpacity =
                     parseFloat(event.target.style.opacity) || 0;
