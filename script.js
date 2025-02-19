@@ -1,8 +1,6 @@
 const defaultGridSettings = 16;
 const defaultColor = "#000000";
 
-let currentColor;
-
 const container = document.querySelector(".container");
 const gridRange = document.querySelector("#grid-range");
 const gridValue = document.querySelector("#gridValue");
@@ -65,6 +63,8 @@ function createGrid(gridSize) {
     let containerWidth = fixedWidth + 2;
     container.style.width = `${containerWidth}px`;
 
+    const defaultGridColor = "#ffffff";
+
     for (let i = 0; i < gridSize; i++) {
         for (let j = 0; j < gridSize; j++) {
             const div = document.createElement("div");
@@ -72,7 +72,8 @@ function createGrid(gridSize) {
             div.style.height = `${boxSize}px`;
             div.style.width = `${boxSize}px`;
             div.style.border = "1px solid lightgray";
-            div.style.backgroundColor = "white";
+            div.style.backgroundColor = defaultGridColor;
+            div.setAttribute("data-color", defaultGridColor);
 
             fragmentDivs.appendChild(div);
         }
@@ -96,16 +97,42 @@ function addHoverEffect(mode, color) {
             .padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
     }
 
+    function resetOpacity(square) {
+        const currentColor = colorPicker.value;
+        if (
+            square.getAttribute("data-color") !== currentColor ||
+            square.getAttribute("changed-by") !== "darken"
+        ) {
+            square.setAttribute("data-opacity", "0");
+            square.setAttribute("changed-by", "darken");
+
+            square.style.opacity = 0;
+        }
+    }
+
+    function opacityEffect(square, color) {
+        resetOpacity(square);
+
+        let currentOpacity =
+            parseFloat(square.getAttribute("data-opacity")) + 0.1;
+
+        currentOpacity = Math.min(currentOpacity, 1.0);
+
+        square.style.backgroundColor = color;
+        square.style.opacity = currentOpacity.toString();
+        square.setAttribute("data-opacity", currentOpacity.toString());
+        square.setAttribute("data-color", color);
+    }
+
     function hoverEffect(event) {
         if (event.target !== container) {
             event.stopPropagation();
 
-            console.log(mode);
-            console.log(color);
-
             if (mode == "normal") {
                 event.target.style.backgroundColor = color;
                 event.target.style.opacity = 1;
+                event.target.setAttribute("data-color", color);
+                event.target.setAttribute("changed-by", "normal");
             } else if (mode == "random") {
                 let red = Math.floor(Math.random() * 256);
                 let blue = Math.floor(Math.random() * 256);
@@ -114,18 +141,19 @@ function addHoverEffect(mode, color) {
                 event.target.style.backgroundColor = `rgb(${red}, ${blue}, ${green})`;
                 event.target.style.opacity = 1;
 
-                colorPicker.value = rgbToHex(red, blue, green);
+                let hexColor = rgbToHex(red, blue, green);
+
+                colorPicker.value = hexColor;
+                event.target.setAttribute("data-color", hexColor);
+                event.target.setAttribute("changed-by", "random");
             } else if (mode == "darken") {
-                event.target.style.backgroundColor = color;
-
-                let currentOpacity =
-                    parseFloat(event.target.style.opacity) || 0;
-
-                currentOpacity = Math.min(currentOpacity + 0.1, 1.0);
-
-                event.target.style.opacity = currentOpacity.toString();
+                opacityEffect(event.target, color);
             }
         }
+
+        // console.log(mode);
+        // console.log(color);
+        // console.log(event.target);
     }
 
     container.addEventListener("mouseenter", hoverEffect, {
